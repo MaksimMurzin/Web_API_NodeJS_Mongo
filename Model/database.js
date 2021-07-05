@@ -8,7 +8,7 @@ mongoose.connect("mongodb://localhost:27017/apiPractice", {useNewUrlParser: true
 // ===================== portfolios ==================================
 //#region
 const portfolioSchema = new mongoose.Schema({
-    id: String,
+    id: Number,
     name: String
 });
 
@@ -62,6 +62,19 @@ const Position = mongoose.model("Positions", positionSchema);
 //     } 
 // } )
 //#endregion    
-module.exports = { Portfolio, Position };
 
- 
+
+const Ports = [];
+const Pos = [];
+
+Portfolio.find( {}, (err, foundItems) => {foundItems.forEach(item => { 
+    Ports.push(item)})
+}) 
+
+Position.find({}, (err, foundItems) => {
+    foundItems.forEach(item => { 
+        Pos.push(item)})
+
+});
+
+module.exports = [ Ports, Pos ];
